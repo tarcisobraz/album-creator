@@ -6,6 +6,15 @@ body
         text-align: center;
 }
 
+button
+{
+	font-size: 20px;
+        background-color: #FF8C00;
+        border: 2px dashed #FFD700;
+        color: red;
+        text-align: center;
+}
+
 #main
 {
         padding: 30px;
@@ -20,12 +29,4 @@ h1
         color: #996600;
 }
 
-#button
-{
-        font-size: 20px;
-        background-color: #FF8C00;
-        border: 2px dashed #FFD700;
-        color: red;
-        text-align: center;
-}
 

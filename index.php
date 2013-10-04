@@ -4,7 +4,7 @@
 	<head>
 		<title>Album Creator</title>
 		<link href="Site.css" rel="stylesheet">
-		<script src="script.js" type="text/javascript"></script>
+		<!--<script src="script.js" type="text/javascript"></script>-->
 	</head>
 
 	<body>
@@ -14,12 +14,21 @@
 				// init the FB JS SDK
 				FB.init({
 				  appId      : 361402127326796,                        // App ID from the app dashboard
-				  channelUrl : 'http://sheltered-oasis-9211.herokuapp.com/channel.html', // Channel file for x-domain comms
+				  channelUrl : 'http://sheltered-oasis-9211.herokuapp.com/', // Channel file for x-domain comms
 				  status     : true,                                 // Check Facebook Login status
 				  xfbml      : false                                  // Look for social plugins on the page
 				});
 
-				FB.Event.subscribe('auth.authResponseChange', function(response) {
+				  FB.Event.subscribe('auth.authResponseChange', function(response) {
+					if (response.status === 'connected') {
+						sayHello();
+					} else if (response.status === 'not_authorized') {
+						FB.login();
+					} else {
+						FB.login();
+					}
+				  });
+				/*FB.Event.subscribe('auth.authResponseChange', function(response) {
 					if (response.status === 'connected') {
 						sayHello();
 					else if (response.status === 'not_authorized') {
@@ -27,7 +36,7 @@
 					else {
 						FB.login();
 					}
-				});
+				});*/
 
 				// Additional initialization code such as adding Event Listeners goes here
 				};
@@ -53,9 +62,17 @@
 			<h2>We organize your photos for you!</h2>
 			<img src="http://www.mosphotography.com/img/albums/digital-album-flat.jpg">
 
-			<div id="button" height="80px" width="150px" >Create Your Photo-Album</div>
+			<button id="create_album" height="80px" width="150px" onclick="loginFB">Create Your Photo-Album</button>
 			<?php include("Footer.php"); ?>
 		</div>
+
+		<script>
+			function loginFB() {
+				FB.login();
+			}
+		</script>
+
+		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 	</body>
 
 </html>
