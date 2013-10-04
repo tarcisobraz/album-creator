@@ -19,6 +19,16 @@
 				  xfbml      : false                                  // Look for social plugins on the page
 				});
 
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+					if (response.status === 'connected') {
+						sayHello();
+					else if (response.status === 'not_authorized') {
+						FB.login();
+					else {
+						FB.login();
+					}
+				});
+
 				// Additional initialization code such as adding Event Listeners goes here
 				};
 
@@ -30,6 +40,13 @@
 				 js.src = "//connect.facebook.net/en_US/all.js";
 				 fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
+
+				function sayHello() {
+					console.log('Welcome! Fetching your information...');
+					FB.api('/me', function(response) {
+						console.log('Good to see you ' + response.name);
+					});
+				}
 			</script>
 		<div id="main">
 			<h1>Album Creator</h1>
