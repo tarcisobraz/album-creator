@@ -19,7 +19,7 @@
 				  xfbml      : false                                  // Look for social plugins on the page
 				});
 
-				  FB.Event.subscribe('auth.authResponseChange', function(response) {
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
 					if (response.status === 'connected') {
 						sayHello();
 					} else if (response.status === 'not_authorized') {
@@ -27,17 +27,8 @@
 					} else {
 						FB.login();
 					}
-				  });
-				/*FB.Event.subscribe('auth.authResponseChange', function(response) {
-					if (response.status === 'connected') {
-						sayHello();
-					else if (response.status === 'not_authorized') {
-						FB.login();
-					else {
-						FB.login();
-					}
-				});*/
-
+				});
+				
 				// Additional initialization code such as adding Event Listeners goes here
 				};
 
@@ -62,7 +53,7 @@
 			<h2>We organize your photos for you!</h2>
 			<img src="http://www.mosphotography.com/img/albums/digital-album-flat.jpg">
 
-			<button id="create_album" height="80px" width="150px" onclick="loginFB">Create Your Photo-Album</button>
+			<button id="create_album" height="80px" width="150px" onclick="loginFB()">Create Your Photo-Album</button>
 			<?php include("Footer.php"); ?>
 		</div>
 
