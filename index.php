@@ -59,7 +59,10 @@
 
 		<script>
 			function loginFB() {
-				FB.login();
+				FB.login(function(response {
+				
+				},
+				{scope: 'email,user_photos,publish_actions'});
 			}
 		</script>
 
