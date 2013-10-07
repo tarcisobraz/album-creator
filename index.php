@@ -53,19 +53,30 @@
 		</div>
 
 		<script>
+			function sayHello() {
+				console.log('Welcome! Fetching your information...');
+				FB.api('/me', function(response) {
+					console.log('Good to see you ' + response.name);
+				});
+				getAlbums();
+			}
+
+			function getAlbums() {
+					console.log('Fetching albums info...');
+					FB.api('/me/albums?fields=id,name', function(response) {
+						for (var i = 0; i < response.length; i++) {
+							console.log('Album ' + i + ': ' + response[i].name);
+						}
+					});
+	
+			}
+		
 			function loginFB() {
 				FB.login(function(response) {
 					if (response.authResponse) {
 						sayHello();
 					}				
 				}, {scope: 'email,user_photos,publish_actions'});
-			}
-			
-			function sayHello() {
-				console.log('Welcome! Fetching your information...');
-				FB.api('/me', function(response) {
-					console.log('Good to see you ' + response.name);
-				});
 			}
 			
 		</script>
