@@ -78,7 +78,6 @@
 					}				
 				}, {scope: 'email,user_photos,publish_actions'});
 			}
-			
 		</script>
 
 		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
