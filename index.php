@@ -65,8 +65,8 @@
 					console.log('Fetching albums info...');
 					FB.api('/me/albums?fields=id,name', function(response) {
 						console.log(response);
-						console.log(response.length);
-						console.log(response[0]);
+						console.log(response.data);
+						console.log(response.data.length);
 						/*for (var i = 0; i < response.length; i++) {
 							console.log('Album ' + i + ': ' + response[i].name);
 						}*/
