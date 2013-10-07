@@ -19,7 +19,7 @@
 				  xfbml      : false                                  // Look for social plugins on the page
 				});
 
-				FB.Event.subscribe('auth.authResponseChange', function(response) {
+				/*FB.Event.subscribe('auth.authResponseChange', function(response) {
 					if (response.status === 'connected') {
 						sayHello();
 					} else if (response.status === 'not_authorized') {
@@ -27,7 +27,7 @@
 					} else {
 						FB.login();
 					}
-				});
+				});*/
 				
 				// Additional initialization code such as adding Event Listeners goes here
 				};
@@ -64,9 +64,10 @@
 			function getAlbums() {
 					console.log('Fetching albums info...');
 					FB.api('/me/albums?fields=id,name', function(response) {
-						for (var i = 0; i < response.length; i++) {
+						console.log(response);
+						/*for (var i = 0; i < response.length; i++) {
 							console.log('Album ' + i + ': ' + response[i].name);
-						}
+						}*/
 					});
 	
 			}
