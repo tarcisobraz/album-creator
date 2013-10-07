@@ -64,12 +64,10 @@
 			function getAlbums() {
 					console.log('Fetching albums info...');
 					FB.api('/me/albums?fields=id,name', function(response) {
-						console.log(response);
-						console.log(response.data);
-						console.log(response.data.length);
-						/*for (var i = 0; i < response.length; i++) {
-							console.log('Album ' + i + ': ' + response[i].name);
-						}*/
+						var albums = response.data;
+						for (var i = 0; i < albums.length; i++) {
+							console.log('Album ' + i + ': ' + albums[i].name);
+						}
 					});
 	
 			}
