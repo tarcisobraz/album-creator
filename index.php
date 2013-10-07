@@ -41,12 +41,7 @@
 				 fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
 
-				function sayHello() {
-					console.log('Welcome! Fetching your information...');
-					FB.api('/me', function(response) {
-						console.log('Good to see you ' + response.name);
-					});
-				}
+				
 			</script>
 		<div id="main">
 			<h1>Album Creator</h1>
@@ -64,6 +59,13 @@
 						sayHello();
 					}				
 				}, {scope: 'email,user_photos,publish_actions'});
+			}
+
+			function sayHello() {
+				console.log('Welcome! Fetching your information...');
+				FB.api('/me', function(response) {
+					console.log('Good to see you ' + response.name);
+				});
 			}
 		</script>
 
