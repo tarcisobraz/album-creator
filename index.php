@@ -60,6 +60,7 @@
 					}				
 				}, {scope: 'email,user_photos,publish_actions'});
 			}
+			
 
 			function sayHello() {
 				console.log('Welcome! Fetching your information...');
