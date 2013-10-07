@@ -1,36 +1,4 @@
-window.fbAsyncInit = function() {
-// init the FB JS SDK
-FB.init({
-  appId      : 361402127326796,                        // App ID from the app dashboard
-  channelUrl : 'http://sheltered-oasis-9211.herokuapp.com/', // Channel file for x-domain comms
-  status     : true,                                 // Check Facebook Login status
-  xfbml      : false                                  // Look for social plugins on the page
-});
-
-/*FB.Event.subscribe('auth.authResponseChange', function(response) {
-	if (response.status === 'connected') {
-		sayHello();
-	} else if (response.status === 'not_authorized') {
-		FB.login();
-	} else {
-		FB.login();
-	}
-});*/
-
-// Additional initialization code such as adding Event Listeners goes here
-};
-
-// Load the SDK asynchronously
-(function(d, s, id){
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) {return;}
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/en_US/all.js";
- fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
-function getAlbums() {
+window.fbAsyncInit = function getAlbums() {
 	console.log('Fetching albums info...');
 	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
 		var albums = response.data;
@@ -42,26 +10,26 @@ function getAlbums() {
 
 	return albumsResponse;
 	
-}
+};
 
-function sayHello() {
+window.fbAsyncInit = function sayHello() {
 	console.log('Welcome! Fetching your information...');
 	FB.api('/me', function(response) {
 		console.log('Good to see you ' + response.name);
 	});
 //	getAlbums();
-}
+};
 
-function loginFB() {
+window.fbAsyncInit = function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
 			sayHello();
 			window.open("AlbumChoice.php", "_self");
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
-}
+};
 
-function createAlbumsTable() {
+window.fbAsyncInit = function createAlbumsTable() {
 	console.log('Creating Albums table');
 	var myAlbums = getAlbums();
 
@@ -85,4 +53,4 @@ function createAlbumsTable() {
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader + albumsTBody + "</table>";
 	
 	document.getElementById('albumsTable').innerHTML = myAlbumsTable;
-}
+};
