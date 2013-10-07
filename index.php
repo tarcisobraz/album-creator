@@ -53,20 +53,21 @@
 		</div>
 
 		<script>
-			function loginFB() {
-				FB.login(function(response) {
-					if (response.status === 'connected') {
-						sayHello();
-					}				
-				}, {scope: 'email,user_photos,publish_actions'});
-			}
-
 			function sayHello() {
 				console.log('Welcome! Fetching your information...');
 				FB.api('/me', function(response) {
 					console.log('Good to see you ' + response.name);
 				});
 			}
+		
+			function loginFB() {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						sayHello();
+					}				
+				}, {scope: 'email,user_photos,publish_actions'});
+			}
+			
 		</script>
 
 		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
