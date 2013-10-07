@@ -59,7 +59,7 @@
 
 		<script>
 			function loginFB() {
-				FB.login(function(response {
+				FB.login(function(response) {
 					if (response.status === 'connected') {
 						sayHello();
 					}				
