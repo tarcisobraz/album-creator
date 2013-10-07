@@ -4,7 +4,7 @@
 	<head>
 		<title>Album Creator</title>
 		<link href="Site.css" rel="stylesheet">
-		<!--<script src="script.js" type="text/javascript"></script>-->
+		<script src="script.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -53,32 +53,29 @@
 		</div>
 
 		<script>
-			function sayHello() {
-				console.log('Welcome! Fetching your information...');
-				FB.api('/me', function(response) {
-					console.log('Good to see you ' + response.name);
-				});
-				getAlbums();
-			}
 
-			function getAlbums() {
-					console.log('Fetching albums info...');
-					FB.api('/me/albums?fields=id,name', function(response) {
-						var albums = response.data;
-						for (var i = 0; i < albums.length; i++) {
-							console.log('Album ' + i + ': ' + albums[i].name);
-						}
-					});
-	
-			}
+// 			function createAlbumsTable() {
+// 				console.log('Creating Albums table');
+// 				var myAlbums = getAlbums();
+
+// 				var albumsTHeader = "<thead><tr><th>Choose the album to be used as source<\th></tr></thead>";
+// 				var albumsTBody = "<tbody>";
+
+// 				for (var i = 0; i < myAlbums.length; i++) {
+// 					var albumCoverImg = FB.api('/' + myAlbums[i].id + '/photos?fields=source', function(response) {
+// 						return response.data[0].source;
+// 					});
+// 					var albumRow = "<tr style='text-align: center;'><img height=\"80px\" width=\"100px\" src=" + albumCoverImg + "> " + myAlbums[i].name + "<\tr>";
+// 					albumsTBody += albumRow;
+// 				}
+
+// 				albumsTBody += "</tbody>";
+				
+// 				var myAlbumsTable = "<table border=1px>";
+				
+				
+// 			}
 		
-			function loginFB() {
-				FB.login(function(response) {
-					if (response.authResponse) {
-						sayHello();
-					}				
-				}, {scope: 'email,user_photos,publish_actions'});
-			}
 		</script>
 
 		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
