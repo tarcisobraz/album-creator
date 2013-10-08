@@ -24,7 +24,7 @@ function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
 			sayHello();
-//			window.open("AlbumChoice.php", "_self");
+			window.open("AlbumChoice.php", "_self");
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
@@ -76,3 +76,11 @@ function createAlbumsTable() {
 	
 	document.getElementById('albumsTable').innerHTML = myAlbumsTable;
 };
+
+(function(d, s, id){
+	 var js, fjs = d.getElementsByTagName(s)[0];
+	 if (d.getElementById(id)) {return;}
+	 js = d.createElement(s); js.id = id;
+	 js.src = "//connect.facebook.net/en_US/all.js";
+	 fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
