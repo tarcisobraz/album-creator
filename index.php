@@ -10,28 +10,6 @@
 	<body>
 		<div id="fb-root"></div>
 		<script>
-			window.fbAsyncInit = function() {
-				// init the FB JS SDK
-				FB.init({
-				  appId      : 361402127326796,                        // App ID from the app dashboard
-				  channelUrl : 'http://sheltered-oasis-9211.herokuapp.com/', // Channel file for x-domain comms
-				  status     : true,                                 // Check Facebook Login status
-				  xfbml      : false                                  // Look for social plugins on the page
-				});
-
-				/*FB.Event.subscribe('auth.authResponseChange', function(response) {
-					if (response.status === 'connected') {
-						sayHello();
-					} else if (response.status === 'not_authorized') {
-						FB.login();
-					} else {
-						FB.login();
-					}
-				});*/
-
-			// Additional initialization code such as adding Event Listeners goes here
-			};
-
 			// Load the SDK asynchronously
 			(function(d, s, id){
 			 var js, fjs = d.getElementsByTagName(s)[0];
