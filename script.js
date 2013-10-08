@@ -40,7 +40,10 @@ function sayHello() {
 function getAlbums() {
 	console.log('Fetching albums info...');
 	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
-		var albums = response.data;
+	var albums = response.data;
+	
+	console.log(albums);
+	
 	for (var i = 0; i < albums.length; i++) {
 		console.log('Album ' + i + ': ' + albums[i].name);
 	}
@@ -54,6 +57,8 @@ function getAlbums() {
 function createAlbumsTable() {
 	console.log('Creating Albums table');
 	var myAlbums = getAlbums();
+	
+	console.log(myAlbums);
 
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var albumsTBody = "<tbody>";
