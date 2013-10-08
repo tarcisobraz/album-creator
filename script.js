@@ -1,4 +1,4 @@
-window.fbAsyncInit = function getAlbums() {
+function getAlbums() {
 	console.log('Fetching albums info...');
 	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
 		var albums = response.data;
@@ -12,7 +12,7 @@ window.fbAsyncInit = function getAlbums() {
 	
 };
 
-window.fbAsyncInit = function sayHello() {
+function sayHello() {
 	console.log('Welcome! Fetching your information...');
 	FB.api('/me', function(response) {
 		console.log('Good to see you ' + response.name);
@@ -20,7 +20,7 @@ window.fbAsyncInit = function sayHello() {
 //	getAlbums();
 };
 
-window.fbAsyncInit = function loginFB() {
+function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
 			sayHello();
@@ -29,7 +29,7 @@ window.fbAsyncInit = function loginFB() {
 	}, {scope: 'email,user_photos,publish_actions'});
 };
 
-window.fbAsyncInit = function createAlbumsTable() {
+function createAlbumsTable() {
 	console.log('Creating Albums table');
 	var myAlbums = getAlbums();
 
