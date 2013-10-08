@@ -38,27 +38,31 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbums() {
+function getAlbums(callback) {
 	console.log('Fetching albums info...');
-	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
-	var albums = response.data;
+	FB.api('/me/albums?fields=id,name', function(response) {
+		callback(response.data);
 	
-	console.log('getAlbums response:' + albums);
-	
-	for (var i = 0; i < albums.length; i++) {
-		console.log('Album ' + i + ': ' + albums[i].name);
-	}
-		return albums;
+	//	console.log('getAlbums response:' + albums);
+	//	
+	//	for (var i = 0; i < albums.length; i++) {
+	//		console.log('Album ' + i + ': ' + albums[i].name);
+	//	}
+	//		return albums;
 	});
+};
 
-	return albumsResponse;
-	
+function getAlbumCover(albumId, callback) {
+	FB.api('/' + albumId + '/photos?fields=source', function(response) {
+		callback(response.data[0]);
+	});
 };
 
 function createAlbumsTable() {
 	console.log('Creating Albums table');
-	FB.api('/me/albums?fields=id,name', function(response) {
-		var myAlbums = response.data;
+	
+	var myAlbums = getAlbums( function(model) {
+		
 		console.log('getAlbums response in createAlbumsTable' + myAlbums);
 		
 		var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
@@ -67,13 +71,14 @@ function createAlbumsTable() {
 		for (var i = 0; i < myAlbums.length; i++) {
 			var currAlbumName = myAlbums[i].name;
 			console.log('Inserting album ' + currAlbumName + ' in the table.');
-			FB.api('/' + myAlbums[i].id + '/photos?fields=source', function(response) {
-				var albumCoverImg = response.data[0].source;
-				console.log(albumCoverImg);
-				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + albumCoverImg + "> " + currAlbumName + "</td></tr>";
+
+			var albumCoverImg = getAlbumCover(myAlbums[i].id, function(model) {
+				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + model.source + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
 				albumsTBody += albumRow;
 			});
+			
+			console.log(albumCoverImg);
 		}
 		
 		console.log("Finished inserting albums to the table. Loading table now!");
