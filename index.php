@@ -9,9 +9,6 @@
 
 	<body>
 		<div id="fb-root"></div>
-<!-- 		<script> -->
-<!-- // 			// Load the SDK asynchronously -->
-<!-- 		</script> -->
 		<div id="main">
 			<h1>Album Creator</h1>
 			<h2>We organize your photos for you!</h2>
