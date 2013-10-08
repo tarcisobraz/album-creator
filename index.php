@@ -49,35 +49,6 @@
 			<button id="create_album" height="80px" width="150px" onclick="loginFB()">Create Your Photo-Album</button>
 			<?php include("Footer.php"); ?>
 		</div>
-		
-		<script>
-			function createAlbumsTable() {
-				console.log('Creating Albums table');
-				var myAlbums = getAlbums();
-
-				var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
-				var albumsTBody = "<tbody>";
-
-				for (var i = 0; i < myAlbums.length; i++) {
-					console.log('Inserting album ' + myAlbums[i].name + ' in the table.');
-					var albumCoverImg = FB.api('/' + myAlbums[i].id + '/photos?fields=source', function(response) {
-						return response.data[0].source;
-					});
-					var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + albumCoverImg + "> " + myAlbums[i].name + "</td></tr>";
-					console.log(albumRow);
-					albumsTBody += albumRow;
-				}
-
-				console.log("Finished inserting albums to the table. Loading table now!");
-				
-				albumsTBody += "</tbody>";
-
-				var myAlbumsTable = "<table border=1px>" + albumsTHeader + albumsTBody + "</table>";
-				
-				document.getElementById('albumsTable').innerHTML = myAlbumsTable;
-			};
-		</script>
-
 		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 	</body>
 
