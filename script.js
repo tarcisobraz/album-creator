@@ -81,7 +81,7 @@ function createAlbumsTable() {
 			
 			albumsTBody += albumsTBodyRows;
 			
-			console.log(albumCoverImg);
+			console.log(albumsTBodyRows);
 		}
 		
 		console.log("Finished inserting albums to the table. Loading table now!");
