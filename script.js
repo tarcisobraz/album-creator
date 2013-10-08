@@ -56,9 +56,9 @@ function getAlbums() {
 
 function createAlbumsTable() {
 	console.log('Creating Albums table');
-	console.log('Fetching albums info...');
 	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
-	var myAlbums = response.data;
+		return response.data;
+	});
 	
 	console.log('getAlbums response in createAlbumsTable' + myAlbums);
 
