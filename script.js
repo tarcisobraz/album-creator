@@ -65,11 +65,12 @@ function createAlbumsTable() {
 		var albumsTBody = "<tbody>";
 		
 		for (var i = 0; i < myAlbums.length; i++) {
-			console.log('Inserting album ' + myAlbums[i].name + ' in the table.');
+			var currAlbumName = myAlbums[i].name;
+			console.log('Inserting album ' + currAlbumName + ' in the table.');
 			FB.api('/' + myAlbums[i].id + '/photos?fields=source', function(response) {
 				var albumCoverImg = response.data[0].source;
 				console.log(albumCoverImg);
-				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + albumCoverImg + "> " + myAlbums[i].name + "</td></tr>";
+				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + albumCoverImg + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
 				albumsTBody += albumRow;
 			});
