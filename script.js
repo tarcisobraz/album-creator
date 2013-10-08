@@ -76,7 +76,7 @@ function createAlbumsTable() {
 			getAlbumCover(model[i].id, function(picture) {
 				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
-				albumsTBody += albumRow;
+				albumsTBody += albumRow + 'a';
 			});
 			
 			console.log(albumsTBody);
