@@ -49,6 +49,25 @@
 			<button id="create_album" height="80px" width="150px" onclick="loginFB()">Create Your Photo-Album</button>
 			<?php include("Footer.php"); ?>
 		</div>
+		
+		<script>
+			function loginFB() {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						sayHello();
+						window.open("AlbumChoice.php", "_self");
+					}				
+				}, {scope: 'email,user_photos,publish_actions'});
+			};
+
+			function sayHello() {
+				console.log('Welcome! Fetching your information...');
+				FB.api('/me', function(response) {
+					console.log('Good to see you ' + response.name);
+				});
+//				getAlbums();
+			};
+		</script>
 
 		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
 	</body>
