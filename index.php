@@ -49,7 +49,7 @@
 			<button id="create_album" height="80px" width="150px" onclick="loginFB()">Create Your Photo-Album</button>
 			<?php include("Footer.php"); ?>
 		</div>
-		<!--<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>-->
+		<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
 	</body>
 
 </html>
