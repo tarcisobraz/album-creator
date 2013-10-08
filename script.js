@@ -63,17 +63,17 @@ function createAlbumsTable() {
 	
 	var myAlbums = getAlbums( function(model) {
 		
-		console.log('getAlbums response in createAlbumsTable' + myAlbums);
+		console.log('getAlbums response in createAlbumsTable' + model);
 		
 		var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 		var albumsTBody = "<tbody>";
 		
-		for (var i = 0; i < myAlbums.length; i++) {
-			var currAlbumName = myAlbums[i].name;
+		for (var i = 0; i < model.length; i++) {
+			var currAlbumName = model[i].name;
 			console.log('Inserting album ' + currAlbumName + ' in the table.');
 
-			var albumCoverImg = getAlbumCover(myAlbums[i].id, function(model) {
-				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + model.source + "> " + currAlbumName + "</td></tr>";
+			var albumCoverImg = getAlbumCover(model[i].id, function(model2) {
+				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + model2.source + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
 				albumsTBody += albumRow;
 			});
