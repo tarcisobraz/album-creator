@@ -23,8 +23,9 @@ window.fbAsyncInit = function() {
 function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
-			window.open("AlbumChoice.php", "_self");
+//			window.open("AlbumChoice.php", "_self");
 			sayHello();
+			createAlbumsTable();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
