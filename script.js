@@ -72,11 +72,14 @@ function createAlbumsTable() {
 			var currAlbumName = model[i].name;
 			console.log('Inserting album ' + currAlbumName + ' in the table.');
 
-			var albumCoverImg = getAlbumCover(model[i].id, function(model2) {
+			var albumsTBodyRows = getAlbumCover(model[i].id, function(model2) {
 				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + model2.source + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
 				albumsTBody += albumRow;
+				return albumsTBody;
 			});
+			
+			albumsTBody += albumsTBodyRows;
 			
 			console.log(albumCoverImg);
 		}
