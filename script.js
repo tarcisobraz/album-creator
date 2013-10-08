@@ -24,7 +24,7 @@ function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
 			sayHello();
-			window.open("AlbumChoice.php", "_self");
+//			window.open("AlbumChoice.php", "_self");
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
