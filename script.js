@@ -1,3 +1,12 @@
+function loginFB() {
+	FB.login(function(response) {
+		if (response.authResponse) {
+			sayHello();
+			window.open("AlbumChoice.php", "_self");
+		}				
+	}, {scope: 'email,user_photos,publish_actions'});
+};
+
 function getAlbums() {
 	console.log('Fetching albums info...');
 	var albumsResponse = FB.api('/me/albums?fields=id,name', function(response) {
@@ -18,15 +27,6 @@ function sayHello() {
 		console.log('Good to see you ' + response.name);
 	});
 //	getAlbums();
-};
-
-function loginFB() {
-	FB.login(function(response) {
-		if (response.authResponse) {
-			sayHello();
-			window.open("AlbumChoice.php", "_self");
-		}				
-	}, {scope: 'email,user_photos,publish_actions'});
 };
 
 function createAlbumsTable() {
