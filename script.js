@@ -55,7 +55,8 @@ function getAlbumCover(currIndex, callback) {
 	}
 };
 
-function createAlbumsTable(albums) {
+function createAlbumsTable(input) {
+	var albums = input;
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
