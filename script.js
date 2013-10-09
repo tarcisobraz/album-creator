@@ -55,8 +55,6 @@ function getAlbumCover(currIndex, callback) {
 	}
 };
 
-
-
 function createAlbumsTable(albums) {
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
@@ -67,7 +65,8 @@ function createAlbumsTable(albums) {
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
 	FB.api('/me/albums?fields=id,name', function(response) {
-		callback(response.data);	
+		var albums = response.data;
+		callback(albums);	
 	
 	//	console.log('getAlbums response:' + albums);
 	//	
