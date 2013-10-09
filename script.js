@@ -44,7 +44,7 @@ function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
 		console.log("Album id: " + currAlbum.id);
 		FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
 			console.log("pictures: " + pictures.data);
-			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + pictures.data[0].source + "> " + currAlbum.name + "</td></tr>";
+			var albumRow = "<tr style='text-align: center;'><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
 			getAlbumCover(myAlbumsTable, albumsTBody, albums, ++currIndex);
