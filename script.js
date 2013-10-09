@@ -89,7 +89,7 @@ function createAlbumsTable() {
 		
 	});
 	
-	
+	console.log(myAlbumsTable);
 	
 	document.getElementById('albumsTable').innerHTML = myAlbumsTable;
 };
