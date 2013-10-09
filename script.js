@@ -38,14 +38,14 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(currIndex, callback) {
+function getAlbumCover(albums, currIndex, callback) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
 		FB.api('/' + currAlbum.id + '/photos?fields=source', function(picture) {
 			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbum.name + "</td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
-			callback(++currIndex, response.data[0]);
+			callback(albums, ++currIndex, response.data[0]);
 		});
 	} else {
 		albumsTBody += "</tbody>";
@@ -55,20 +55,17 @@ function getAlbumCover(currIndex, callback) {
 	}
 };
 
-function createAlbumsTable(input) {
-	var albums = input;
+function createAlbumsTable(albums) {
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
-	getAlbumCover(0, getAlbumCover);
+	getAlbumCover(albums, 0, getAlbumCover);
 }
 	
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
-	var albums;
 	FB.api('/me/albums?fields=id,name', function(response) {
-		albums = response.data;
-		callback(albums);	
+		callback(response.data);	
 	
 	//	console.log('getAlbums response:' + albums);
 	//	
