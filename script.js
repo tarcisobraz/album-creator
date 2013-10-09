@@ -25,7 +25,7 @@ function loginFB() {
 		if (response.authResponse) {
 //			window.open("AlbumChoice.php", "_self");
 			sayHello();
-			createAlbumsTable();
+			getAlbums(createAlbumsTable);
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
@@ -38,14 +38,16 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(albums, currIndex, callback) {
+function getAlbumCover(currIndex, callback) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
 		FB.api('/' + currAlbum.id + '/photos?fields=source', function(picture) {
 			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbum.name + "</td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
-			callback(albums, ++currIndex, response.data[0]);
+			if (typeof callback === "function") {
+				callback(++currIndex, response.data[0]);
+			}
 		});
 	} else {
 		albumsTBody += "</tbody>";
@@ -55,18 +57,22 @@ function getAlbumCover(albums, currIndex, callback) {
 	}
 };
 
-function createAlbumsTable(albums) {
+function createAlbumsTable() {
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
-	getAlbumCover(albums, 0, getAlbumCover);
+	getAlbumCover(0, getAlbumCover);
 }
 	
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
+	var albums;
 	FB.api('/me/albums?fields=id,name', function(response) {
-		console.log("Albums response: " + response.data);
-		callback(response.data);	
+		albums = response.data;
+		console.log("Albums response: " + albums);
+		if (typeof callback === "function") {
+			callback(albums);
+		};
 	
 	//	console.log('getAlbums response:' + albums);
 	//	
