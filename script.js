@@ -38,10 +38,36 @@ function sayHello() {
 //	getAlbums();
 };
 
+function getAlbumCover(currIndex, callback) {
+	if (currIndex < albums.length) {
+		var currAlbum = albums[currIndex];
+		FB.api('/' + currAlbum.id + '/photos?fields=source', function(picture) {
+			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbum.name + "</td></tr>";
+			console.log("Curr album row: " + albumRow);
+			albumsTBody += albumRow;
+			callback(++currIndex, response.data[0]);
+		});
+	} else {
+		albumsTBody += "</tbody>";
+		console.log("Finished building albums table. Its body looks like: " + albumsTBody);
+		myAlbumsTable += albumsTBody + "</table>";
+		document.getElementById('albumsTable').innerHTML = myAlbumsTable;
+	}
+};
+
+
+
+function createAlbumsTable(albums) {
+	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
+	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
+	var albumsTBody = "<tbody>";
+	getAlbumCover(0, getAlbumCover);
+}
+	
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
 	FB.api('/me/albums?fields=id,name', function(response) {
-		callback(response.data);
+		callback(response.data);	
 	
 	//	console.log('getAlbums response:' + albums);
 	//	
@@ -52,25 +78,16 @@ function getAlbums(callback) {
 	});
 };
 
-function getAlbumCover(albumId, callback) {
-	FB.api('/' + albumId + '/photos?fields=source', function(response) {
-		callback(response.data[0]);
-	});
-};
-
-function createAlbumsTable() {
+function createAlbumsTable1() {
 	console.log('Creating Albums table');
 	
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
-	var albumsTBody = "<tbody>";
 	
 	getAlbums( function(model) {
 		
 		console.log('getAlbums response in createAlbumsTable' + model);
 		
-		for (var i = 0; i < model.length; i++) {
-			var currAlbumName = model[i].name;
 			console.log('Inserting album ' + currAlbumName + ' in the table.');
 
 			getAlbumCover(model[i].id, function(picture) {
@@ -81,7 +98,6 @@ function createAlbumsTable() {
 			});
 			
 			console.log(albumsTBody);
-		}
 		
 		albumsTBody += "</tbody>";
 		console.log(albumsTBody);
