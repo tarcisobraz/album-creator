@@ -42,8 +42,9 @@ function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
 		console.log("Album id: " + currAlbum.id);
-		FB.api('/' + currAlbum.id + '/photos?fields=source', function(picture) {
-			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbum.name + "</td></tr>";
+		FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
+			console.log("picture: " + pictures);
+			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture[0].source + "> " + currAlbum.name + "</td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
 			getAlbumCover(myAlbumsTable, albumsTBody, albums, ++currIndex);
