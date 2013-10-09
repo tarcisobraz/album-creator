@@ -64,8 +64,9 @@ function createAlbumsTable(albums) {
 	
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
+	var albums;
 	FB.api('/me/albums?fields=id,name', function(response) {
-		var albums = response.data;
+		albums = response.data;
 		callback(albums);	
 	
 	//	console.log('getAlbums response:' + albums);
