@@ -38,7 +38,7 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex, callback) {
+function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
 		FB.api('/' + currAlbum.id + '/photos?fields=source', function(picture) {
@@ -46,7 +46,7 @@ function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex, callback) 
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
 			if (typeof callback === "function") {
-				callback(myAlbumsTable, albumsTBody, albums, ++currIndex, response.data[0]);
+				getAlbumCover(myAlbumsTable, albumsTBody, albums, ++currIndex);
 			}
 		});
 	} else {
@@ -61,7 +61,7 @@ function createAlbumsTable(albumsList) {
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
-	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0, getAlbumCover);
+	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0);
 }
 	
 function getAlbums(callback) {
