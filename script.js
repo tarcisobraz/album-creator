@@ -77,6 +77,7 @@ function createAlbumsTable() {
 				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbumName + "</td></tr>";
 				console.log(albumRow);
 				albumsTBody += albumRow + 'a';
+				console.log("Added an album row: " + albumsTBody);
 			});
 			
 			console.log(albumsTBody);
