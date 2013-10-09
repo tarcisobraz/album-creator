@@ -46,10 +46,8 @@ function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
 			var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbum.name + "</td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
-		});
-		if (typeof callback === "function") {
 			getAlbumCover(myAlbumsTable, albumsTBody, albums, ++currIndex);
-		}
+		});
 	} else {
 		albumsTBody += "</tbody>";
 		console.log("Finished building albums table. Its body looks like: " + albumsTBody);
