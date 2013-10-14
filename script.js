@@ -43,12 +43,12 @@ function createAlbumsTable() {
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
+	var albums;
 	getAlbums();
 	
 	function getAlbums() {
 		console.log('Fetching albums info...');
 		albumsTBody += " ";
-		var albums;
 		function getFBAlbums(fbResponse) {
 			albums = fbResponse.data;
 			console.log("Albums response: " + albums);
