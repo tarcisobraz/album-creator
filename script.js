@@ -38,24 +38,6 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(currIndex) {
-	if (currIndex < albums.length) {
-		var currAlbum = albums[currIndex];
-		console.log("Current Album: " + currAlbum);
-		FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
-			console.log("pictures: " + pictures.data);
-			var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
-			console.log("Curr album row: " + albumRow);
-			albumsTBody += albumRow;
-			getAlbumCover(++currIndex);
-		});
-	} else {
-		albumsTBody += "</tbody>";
-		console.log("Finished building albums table. Its body looks like: " + albumsTBody);
-		myAlbumsTable += albumsTBody + "</table>";
-		document.getElementById('albumsTable').innerHTML = myAlbumsTable;
-	}
-};
 
 function createAlbumsTable() {
 	console.log("Creating albums table...");
@@ -63,22 +45,45 @@ function createAlbumsTable() {
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
 	getAlbums(getAlbumCover);
+	
+	function getAlbums(callback) {
+		console.log('Fetching albums info...');
+		albumsTBody += " ";
+		var albums;
+		function getFBAlbums(fbResponse) {
+			albums = fbResponse.data;
+			console.log("Albums response: " + albums);
+			if (typeof callback === "function") {
+				callback(0);
+			};
+		}
+		
+		FB.api('/me/albums?fields=id,name', getFBAlbums);
+	
+		function getAlbumCover(currIndex) {
+			if (currIndex < albums.length) {
+				var currAlbum = albums[currIndex];
+				console.log("Current Album: " + currAlbum);
+				FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
+					console.log("pictures: " + pictures.data);
+					var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
+					console.log("Curr album row: " + albumRow);
+					albumsTBody += albumRow;
+					getAlbumCover(++currIndex);
+				});
+			} else {
+				albumsTBody += "</tbody>";
+				console.log("Finished building albums table. Its body looks like: " + albumsTBody);
+				myAlbumsTable += albumsTBody + "</table>";
+				document.getElementById('albumsTable').innerHTML = myAlbumsTable;
+			}
+		};
+	};
+	
+	
 //	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0);
 }
 	
-function getAlbums(callback) {
-	console.log('Fetching albums info...');
-	var albums;
-	function getFBAlbums(fbResponse) {
-		albums = fbResponse.data;
-		console.log("Albums response: " + albums);
-		if (typeof callback === "function") {
-			callback(0);
-		};
-	}
-	
-	FB.api('/me/albums?fields=id,name', getFBAlbums);
-};
 
 (function(d, s, id){
 	 var js, fjs = d.getElementsByTagName(s)[0];
