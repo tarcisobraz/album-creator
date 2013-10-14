@@ -25,7 +25,7 @@ function loginFB() {
 		if (response.authResponse) {
 //			window.open("AlbumChoice.php", "_self");
 			sayHello();
-			createAlbumsTable();
+			getAlbumsInfo();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
@@ -39,23 +39,21 @@ function sayHello() {
 };
 
 
-function createAlbumsTable() {
+function getAlbumsInfo() {
 	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
-	getAlbums(getAlbumCover);
+	getAlbums();
 	
-	function getAlbums(callback) {
+	function getAlbums() {
 		console.log('Fetching albums info...');
 		albumsTBody += " ";
 		var albums;
 		function getFBAlbums(fbResponse) {
 			albums = fbResponse.data;
 			console.log("Albums response: " + albums);
-			if (typeof callback === "function") {
-				callback(0);
-			};
+			getAlbumCover(0);
 		}
 		
 		FB.api('/me/albums?fields=id,name', getFBAlbums);
