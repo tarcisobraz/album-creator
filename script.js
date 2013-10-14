@@ -77,7 +77,7 @@ function getAlbums(callback) {
 		};
 	}
 	
-	FB.api('/me/albums?fields=id,name', getFBAlbums(response));
+	FB.api('/me/albums?fields=id,name', getFBAlbums);
 };
 
 (function(d, s, id){
