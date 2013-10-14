@@ -38,16 +38,16 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
+function getAlbumCover(albums, currIndex) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
-		console.log("Album id: " + currAlbum.id);
+		console.log("Current Album: " + currAlbum);
 		FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
 			console.log("pictures: " + pictures.data);
 			var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
-			getAlbumCover(myAlbumsTable, albumsTBody, albums, ++currIndex);
+			getAlbumCover(albums, ++currIndex);
 		});
 	} else {
 		albumsTBody += "</tbody>";
@@ -58,10 +58,12 @@ function getAlbumCover(myAlbumsTable, albumsTBody, albums, currIndex) {
 };
 
 function createAlbumsTable(albumsList) {
+	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
 	var albumsTBody = "<tbody>";
-	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0);
+	getAlbums(getAlbumCover);
+//	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0);
 }
 	
 function getAlbums(callback) {
@@ -71,7 +73,7 @@ function getAlbums(callback) {
 		albums = response.data;
 		console.log("Albums response: " + albums);
 		if (typeof callback === "function") {
-			callback(albums);
+			callback(albums, 0);
 		};
 	
 	//	console.log('getAlbums response:' + albums);
@@ -81,39 +83,6 @@ function getAlbums(callback) {
 	//	}
 	//		return albums;
 	});
-};
-
-function createAlbumsTable1() {
-	console.log('Creating Albums table');
-	
-	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
-	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
-	
-	getAlbums( function(model) {
-		
-		console.log('getAlbums response in createAlbumsTable' + model);
-		
-			console.log('Inserting album ' + currAlbumName + ' in the table.');
-
-			getAlbumCover(model[i].id, function(picture) {
-				var albumRow = "<tr style='text-align: center;'><td><img height=\"80px\" width=\"100px\" src=" + picture.source + "> " + currAlbumName + "</td></tr>";
-				console.log(albumRow);
-				albumsTBody += albumRow + 'a';
-				console.log("Added an album row: " + albumsTBody);
-			});
-			
-			console.log(albumsTBody);
-		
-		albumsTBody += "</tbody>";
-		console.log(albumsTBody);
-		myAlbumsTable += albumsTBody + "</table>";
-		console.log("Finished inserting albums to the table. Loading table now!");
-		
-	});
-	
-	console.log(myAlbumsTable);
-	
-	document.getElementById('albumsTable').innerHTML = myAlbumsTable;
 };
 
 (function(d, s, id){
