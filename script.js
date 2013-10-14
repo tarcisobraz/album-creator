@@ -25,7 +25,7 @@ function loginFB() {
 		if (response.authResponse) {
 //			window.open("AlbumChoice.php", "_self");
 			sayHello();
-			getAlbums(createAlbumsTable);
+			createAlbumsTable();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
@@ -57,7 +57,7 @@ function getAlbumCover(albums, currIndex) {
 	}
 };
 
-function createAlbumsTable(albumsList) {
+function createAlbumsTable() {
 	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
