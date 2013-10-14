@@ -70,7 +70,7 @@ function getAlbums(callback) {
 	console.log('Fetching albums info...');
 	var albums;
 	function getFBAlbums(fbResponse) {
-		albums = response.data;
+		albums = fbResponse.data;
 		console.log("Albums response: " + albums);
 		if (typeof callback === "function") {
 			callback(0);
