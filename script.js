@@ -38,7 +38,7 @@ function sayHello() {
 //	getAlbums();
 };
 
-function getAlbumCover(albums, currIndex) {
+function getAlbumCover(currIndex) {
 	if (currIndex < albums.length) {
 		var currAlbum = albums[currIndex];
 		console.log("Current Album: " + currAlbum);
@@ -47,7 +47,7 @@ function getAlbumCover(albums, currIndex) {
 			var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
 			console.log("Curr album row: " + albumRow);
 			albumsTBody += albumRow;
-			getAlbumCover(albums, ++currIndex);
+			getAlbumCover(++currIndex);
 		});
 	} else {
 		albumsTBody += "</tbody>";
@@ -69,20 +69,15 @@ function createAlbumsTable() {
 function getAlbums(callback) {
 	console.log('Fetching albums info...');
 	var albums;
-	FB.api('/me/albums?fields=id,name', function(response) {
+	function getFBAlbums(fbResponse) {
 		albums = response.data;
 		console.log("Albums response: " + albums);
 		if (typeof callback === "function") {
-			callback(albums, 0);
+			callback(0);
 		};
+	}
 	
-	//	console.log('getAlbums response:' + albums);
-	//	
-	//	for (var i = 0; i < albums.length; i++) {
-	//		console.log('Album ' + i + ': ' + albums[i].name);
-	//	}
-	//		return albums;
-	});
+	FB.api('/me/albums?fields=id,name', getFBAlbums(response));
 };
 
 (function(d, s, id){
