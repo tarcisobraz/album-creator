@@ -9,7 +9,7 @@
 	
 	<body>
 		<div id="fb-root"></div>
-		<button id="choose_fb_album" height="80px" width="250px" onclick="getAlbums(createAlbumsTable)">Choose photos from a facebook album</button>
+		<button id="choose_fb_album" height="80px" width="250px" onclick="createAlbumsTable()">Choose photos from a facebook album</button>
 		<div id="albumsTable"> </div>	
 	</body>
 	

@@ -23,9 +23,9 @@ window.fbAsyncInit = function() {
 function loginFB() {
 	FB.login(function(response) {
 		if (response.authResponse) {
-//			window.open("AlbumChoice.php", "_self");
+			window.open("AlbumChoice.php", "_self");
 			sayHello();
-			getAlbumsInfo();
+			createAlbumsTable();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
@@ -35,11 +35,10 @@ function sayHello() {
 	FB.api('/me', function(response) {
 		console.log('Good to see you ' + response.name);
 	});
-//	getAlbums();
 };
 
 
-function getAlbumsInfo() {
+function createAlbumsTable() {
 	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
 	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
@@ -58,28 +57,26 @@ function getAlbumsInfo() {
 		
 		FB.api('/me/albums?fields=id,name', getFBAlbums);
 	
-		function getAlbumCover(currIndex) {
-			if (currIndex < albums.length) {
-				var currAlbum = albums[currIndex];
-				console.log("Current Album: " + currAlbum);
-				FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
-					console.log("pictures: " + pictures.data);
-					var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
-					console.log("Curr album row: " + albumRow);
-					albumsTBody += albumRow;
-					getAlbumCover(++currIndex);
-				});
-			} else {
-				albumsTBody += "</tbody>";
-				console.log("Finished building albums table. Its body looks like: " + albumsTBody);
-				myAlbumsTable += albumsTBody + "</table>";
-				document.getElementById('albumsTable').innerHTML = myAlbumsTable;
-			}
-		};
 	};
 	
-	
-//	getAlbumCover(myAlbumsTable, albumsTBody, albumsList, 0);
+	function getAlbumCover(currIndex) {
+		if (currIndex < albums.length) {
+			var currAlbum = albums[currIndex];
+			console.log("Current Album: " + currAlbum);
+			FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
+				console.log("pictures: " + pictures.data);
+				var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
+				console.log("Curr album row: " + albumRow);
+				albumsTBody += albumRow;
+				getAlbumCover(++currIndex);
+			});
+		} else {
+			albumsTBody += "</tbody>";
+			console.log("Finished building albums table. Its body looks like: " + albumsTBody);
+			myAlbumsTable += albumsTBody + "</table>";
+			document.getElementById('albumsTable').innerHTML = myAlbumsTable;
+		}
+	};
 }
 	
 
