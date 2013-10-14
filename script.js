@@ -37,7 +37,6 @@ function sayHello() {
 	});
 };
 
-
 function createAlbumsTable() {
 	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
