@@ -42,7 +42,7 @@ function sayHello() {
 function createAlbumsTable() {
 	console.log("Creating albums table...");
 	var albumsTHeader = "<thead><tr><th>Choose the album to be used as source</th></tr></thead>";
-	var myAlbumsTable = "<table border=1px>" + albumsTHeader;
+	var myAlbumsTable = "<table id=\"albums-table\">" + albumsTHeader;
 	var albumsTBody = "<tbody>";
 	var albums;
 	getAlbums();
@@ -66,7 +66,7 @@ function createAlbumsTable() {
 			console.log("Current Album: " + currAlbum);
 			FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
 				console.log("pictures: " + pictures.data);
-				var albumRow = "<tr><td><img height=\"200px\" width=\"300px\" src=" + pictures.data[0].source + "><p>" + currAlbum.name + "</p></td></tr>";
+				var albumRow = "<tr><td><img class=\"album-img\" height=\"200px\" width=\"400px\" src=" + pictures.data[0].source + "><p class=\"album-name\">" + currAlbum.name + "</p></td></tr>";
 				console.log("Curr album row: " + albumRow);
 				albumsTBody += albumRow;
 				getAlbumCover(++currIndex);

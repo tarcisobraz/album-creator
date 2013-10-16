@@ -29,11 +29,37 @@ h1
         color: #996600;
 }
 
-.albumsTable
+#albums-table
 {
-	margin-left: auto; 
-	margin-right: auto; 
-	background-color: #189eaf; 
-	text-align: center; 
-	font-size: 40px'	
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table tr td
+{
+	font-size: 30px;
+	color: black;
+}
+
+table tr:hover
+{
+	background: #00CED1;
+}
+
+.album-img
+{
+	margin: 0px;
+	padding: 0px;
+	height: 80px;
+	width: 100px;
+}
+
+.album-name
+{
+	margin: 0px;
+	padding: 0px;
+	font-size: 20px;
+	text-align: center;
 }
