@@ -41,7 +41,7 @@ function sayHello() {
 
 function createAlbumsTable() {
 	console.log("Creating albums table...");
-	var albumsTHeader = "<thead><th>Choose the album to be used as source:</th></thead>";
+	var albumsTHeader = "<thead><th>Choose one album below:</th></thead>";
 	var myAlbumsTable = "<table id=\"albums-table\">" + albumsTHeader;
 	var albumsTBody = "<tbody>";
 	var albums;
