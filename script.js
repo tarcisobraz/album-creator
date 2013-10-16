@@ -64,9 +64,13 @@ function createAlbumsTable() {
 		if (currIndex < albums.length) {
 			var currAlbum = albums[currIndex];
 			console.log("Current Album: " + currAlbum);
-			FB.api('/' + currAlbum.id + '/photos?fields=source', function(pictures) {
+			FB.api('/' + currAlbum.id + '/photos?fields=source,height,width', function(pictures) {
 				console.log("pictures: " + pictures.data);
-				var albumRow = "<tr><td><img class=\"album-img\" height=\"200px\" width=\"400px\" src=" + pictures.data[0].source + "><p class=\"album-name\">" + currAlbum.name + "</p></td></tr>";
+				var coverPhoto = pictures.data[0];
+				var aspectRatio = coverPhoto.height/coverPhoto.width;
+				var height = aspectRatio*coverPhoto.width; 
+				console.log("AR: " + aspectRatio + "; Height: " + height);
+				var albumRow = "<tr><td><img class=\"album-img\" height=\"" + height + "px\" width=\"400px\" src=" + coverPhoto.source + "><p class=\"album-name\">" + currAlbum.name + "</p></td></tr>";
 				console.log("Curr album row: " + albumRow);
 				albumsTBody += albumRow;
 				getAlbumCover(++currIndex);
