@@ -8,6 +8,7 @@ window.fbAsyncInit = function() {
 	});
 
 	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		console.log("Status: " + status);
 		if (response.status === 'connected') {
 			sayHello();
 		} else if (response.status === 'not_authorized') {
