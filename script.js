@@ -68,9 +68,10 @@ function createAlbumsTable() {
 				console.log("pictures: " + pictures.data);
 				var coverPhoto = pictures.data[0];
 				var aspectRatio = coverPhoto.height/coverPhoto.width;
-				var height = aspectRatio*coverPhoto.width; 
+				var coverWidth = 300;
+				var height = aspectRatio*coverWidth; 
 				console.log("AR: " + aspectRatio + "; Height: " + height);
-				var albumRow = "<tr><td><img class=\"album-img\" height=\"" + height + "px\" width=\"400px\" src=" + coverPhoto.source + "><p class=\"album-name\">" + currAlbum.name + "</p></td></tr>";
+				var albumRow = "<tr><td><img class=\"album-img\" height=\"" + height + "px\" width=\"" + coverWidth + "px\" src=" + coverPhoto.source + "><p class=\"album-name\">" + currAlbum.name + "</p></td></tr>";
 				console.log("Curr album row: " + albumRow);
 				albumsTBody += albumRow;
 				getAlbumCover(++currIndex);
