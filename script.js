@@ -7,7 +7,7 @@ window.fbAsyncInit = function() {
 	  xfbml      : false                                  // Look for social plugins on the page
 	});
 
-	/*FB.Event.subscribe('auth.authResponseChange', function(response) {
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
 		if (response.status === 'connected') {
 			sayHello();
 		} else if (response.status === 'not_authorized') {
@@ -15,7 +15,7 @@ window.fbAsyncInit = function() {
 		} else {
 			FB.login();
 		}
-	});*/
+	});
 
 // Additional initialization code such as adding Event Listeners goes here
 };
@@ -25,7 +25,7 @@ function loginFB() {
 		if (response.authResponse) {
 //			window.open("AlbumChoice.php", "_self");
 			sayHello();
-			createAlbumsTable();
+//			createAlbumsTable();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
