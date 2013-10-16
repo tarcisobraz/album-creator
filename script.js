@@ -25,7 +25,7 @@ function loginFB() {
 		if (response.authResponse) {
 //			window.open("AlbumChoice.php", "_self");
 			sayHello();
-//			createAlbumsTable();
+			createAlbumsTable();
 		}				
 	}, {scope: 'email,user_photos,publish_actions'});
 };
